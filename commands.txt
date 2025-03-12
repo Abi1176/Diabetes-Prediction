@@ -1,0 +1,83 @@
+#Step 1: Launch an EC2 Ubuntu Instance
+Log in to AWS Console
+
+##Go to the AWS Management Console.
+Navigate to EC2 under "Services."
+Launch a New EC2 Instance
+
+Click on Launch Instance.
+Choose an Amazon Machine Image (AMI)
+
+Select Ubuntu Server (latest LTS version recommended).
+Choose an Instance Type
+
+For free-tier, select t2.micro.
+Configure Instance Details
+
+Leave the default settings unless you have specific requirements.
+Add Storage
+
+Default is 8 GiB (increase if needed).
+Configure Security Group
+
+Select Create a new security group.
+Add the following inbound rules:
+SSH (Port 22) → Anywhere (IPv4) [0.0.0.0/0]
+(Optional: If hosting a website, add HTTP (80) and HTTPS (443) rules.)
+Create a Key Pair (for SSH access)
+
+Click Create new key pair.
+Choose RSA and give it a name (e.g., MyUbuntuKey).
+Click Download Key Pair (this downloads a .pem file).
+🚨 Important: Keep this file safe, as it's needed to access your instance.
+Launch the Instance
+
+Click Launch and wait for the instance to be ready.
+Step 2: Convert .pem Key to .ppk for PuTTY
+Since PuTTY does not support .pem files, you need to convert it to .ppk:
+
+Download & Open PuTTYgen
+
+Download PuTTY and open PuTTYgen.
+Load the .pem File
+
+Click Load, set file type to All Files, and select your .pem key.
+Save the Private Key
+
+Click Save private key (ignore the passphrase warning).
+Save it as .ppk (e.g., MyUbuntuKey.ppk).
+Step 3: Connect to the EC2 Instance using PuTTY
+Find Your Public IP
+
+Go to EC2 Dashboard → Instances → Select your instance.
+Copy the Public IPv4 Address.
+Open PuTTY
+
+In Host Name (or IP Address), enter:
+java
+Copy
+Edit
+ubuntu@your-public-ip
+(Replace your-public-ip with the actual public IPv4 address.)
+Load the .ppk Key
+
+In PuTTY, go to Connection → SSH → Auth.
+Click Browse, select your .ppk file, and open.
+Connect
+
+Click Open.
+Click Yes when prompted for a security alert.
+Login to Your Ubuntu Instance
+
+Default username for Ubuntu instances:
+nginx
+Copy
+Edit
+ubuntu
+Step 4: Enable Root Access (Optional)
+If you need root access, run:
+
+bash
+Copy
+Edit
+sudo su
